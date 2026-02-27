@@ -11,7 +11,7 @@ export default function CreatePost({ onCreated }) {
       setLoading(true);
       await createPostApi({ body });
       setBody("");
-      onCreated(); // نعمل reload للبوستات
+      onCreated();    
     } finally {
       setLoading(false);
     }

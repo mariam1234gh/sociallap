@@ -1,11 +1,26 @@
-import React from 'react'
+import { Link, useNavigate } from "react-router-dom";
 
-function Navbar() {
+export default function Navbar() {
+  const navigate = useNavigate();
+  const token = localStorage.getItem("token");
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/login");
+  };
+
   return (
-    <>
-    </>
-    
-  )
-}
+    <nav style={{ display: "flex", gap: "20px", marginBottom: "20px" }}>
+      <Link to="/">Home</Link>
 
-export default Navbar
+      {!token ? (
+        <>
+          <Link to="/login">Login</Link>
+          <Link to="/register">Register</Link>
+        </>
+      ) : (
+        <button onClick={handleLogout}>Logout</button>
+      )}
+    </nav>
+  );
+}
